@@ -13,19 +13,19 @@ Use in conjunction with postman collections for NAE automated login and user cre
 
 ### Go to the terminal and run: 
 
-	virtualenv devwks1020 --> This will create your own virtual environment in which you can install all the dependencies for this workshop
+    virtualenv devwks1020 --> This will create your own virtual environment in which you can install all the dependencies for this workshop
 
-	pip install requests --> will install requests package which is required for this workshop
+    pip install requests --> will install requests package which is required for this workshop
 
-	which python --> tells you the location of default python
+    which python --> tells you the location of default python
 
-	touch variables.py --> Creates a file named variables.py in which you will define variables for this workshop
-	touch workshop.py  --> Creates a file named workshop.py in which you will write the code for this workshop
+    touch variables.py --> Creates a file named variables.py in which you will define variables for this workshop
+    touch workshop.py  --> Creates a file named workshop.py in which you will write the code for this workshop
 
-###	Credentials for this workshop
-	NAE IP: 10.193.30.244
-	username: devwks1020.user{user-number}
-	password: DEVWKS1020user{user-number}
+###    Credentials for this workshop
+    NAE IP: 10.193.30.244
+    username: devwks1020.user{user-number}
+    password: DEVWKS1020user{user-number}
 
 
 replace {usernumber} with the number assigned to your workstation
@@ -41,8 +41,8 @@ password for user1 will be: DEVWKS1020user1
 - 5. Fetch latest epoch
 - 6. Fetch event summary for the latest epoch
 - 7. Fetch events by
-	- a. category
-	- c. severity
+    - a. category
+    - c. severity
 - 8. Find all the epochs in which an event exists
 
 ### Variables
@@ -61,48 +61,48 @@ Import the libraires and define the main method
 
 <em>New Content:</em>
 
-	import requests
-	import json
-	from variables import *
+    import requests
+    import json
+    from variables import *
 
-	#Disable warnings
-	requests.packages.urllib3.disable_warnings()
+    #Disable warnings
+    requests.packages.urllib3.disable_warnings()
 
-	def main():
-	 	"""
-		Main body for DEVWKS-1020. In this, we will
-	        1. Create a session to the NAE instance
-	        2. Access all fabrics
-	        3. Fetch fabric
-	        	a. All fabrics
-	            b. Running fabric
-	        4. Fetch epochs
-	        	a. Last 20 epochs 
-	        	b. Latest epoch
-	        5. Fetch event summary for the latest epoch
-	        6. Fetch events by
-	            a. category
-	            b. severity
-	        7. Find all the epochs in which an event exists
+    def main():
+         """
+        Main body for DEVWKS-1020. In this, we will
+            1. Create a session to the NAE instance
+            2. Access all fabrics
+            3. Fetch fabric
+                a. All fabrics
+                b. Running fabric
+            4. Fetch epochs
+                a. Last 20 epochs 
+                b. Latest epoch
+            5. Fetch event summary for the latest epoch
+            6. Fetch events by
+                a. category
+                b. severity
+            7. Find all the epochs in which an event exists
 
 
-		"""
-		print_banner("Welcome to DEVWKS-1020")
+        """
+        print_banner("Welcome to DEVWKS-1020")
 
-		def print_banner(message):
-	    """
-	    Print a banner
-	    """
-	    print "\n\n*************************************"
-	    print (message)
-	    print "*************************************"
+        def print_banner(message):
+        """
+        Print a banner
+        """
+        print "\n\n*************************************"
+        print (message)
+        print "*************************************"
 
-		if __name__ == '__main__':
-		    main()
+        if __name__ == '__main__':
+            main()
 
 **On the console:**
 
-	python workshop.py
+    python workshop.py
 
 Make sure there are no errors and you see the message "Welcome to DEVWKS-1020" printed on the screen
 
@@ -112,16 +112,16 @@ Continue editing workshop.py
 #### Logon to the NAE instance
 
 Open variables.py and add the following at the end:
-	
-	APIC_IP = "candid2-apic3.cisco.com"
+    
+    APIC_IP = "candid2-apic3.cisco.com"
 
-	NAE_IP = "10.193.30.244"
-	NAE_USER = "devwks1020.user9"
-	NAE_PASS = "DEVWKS1020user9"
-	NAE_HEADER = dict()
+    NAE_IP = "10.193.30.244"
+    NAE_USER = "devwks1020.user9"
+    NAE_PASS = "DEVWKS1020user9"
+    NAE_HEADER = dict()
 
-	APIC_BASE_URL = "https://" + APIC_IP + "/api/"
-	NAE_BASE_URL = "https://" + NAE_IP + "/api/v1/"
+    APIC_BASE_URL = "https://" + APIC_IP + "/api/"
+    NAE_BASE_URL = "https://" + NAE_IP + "/api/v1/"
 
 **Edit workshop.py:**
 
@@ -130,7 +130,7 @@ Open variables.py and add the following at the end:
 
 **Add the following new method for login**
 
-	def nae_login(nae_ip, nae_user, nae_pass):
+    def nae_login(nae_ip, nae_user, nae_pass):
     """
     Logon to NAE
         :parameter:
@@ -196,7 +196,7 @@ Open variables.py and add the following at the end:
 
 **On the console:**
 
-	python workshop.py
+    python workshop.py
 
 **Output** </br>
     - 1. Make sure there are no errors. </br>
@@ -213,8 +213,8 @@ In this task, you will fetch the fabrics which are configured to be monitored by
 
 Edit **variables.py**
 
-	FABRIC_URL = NAE_BASE_URL + "assured-networks/aci-fabric"
-	
+    FABRIC_URL = NAE_BASE_URL + "assured-networks/aci-fabric"
+    
 **Continue editing <em>workshop.py**
 
     - 1. Add a new method get_fabric_ids()
@@ -222,7 +222,7 @@ Edit **variables.py**
 
 **Add the following new method**
 
-	def get_fabric_ids():
+    def get_fabric_ids():
     """
     Get a list of all Fabrics, along with APICs
         :return:
@@ -257,11 +257,11 @@ Edit **variables.py**
     # Get all fabric Ids
     fabric_ids = get_fabric_ids()
     print json.dumps(fabric_ids, indent=4, sort_keys=True)
-	
+    
 
 **On the console:**
 
-	python workshop.py
+    python workshop.py
 
 **Output:**
 
@@ -276,7 +276,7 @@ Edit **variables.py**
 
 **Continue editing variables.py**
 
-	RUNNING_FABRIC = None
+    RUNNING_FABRIC = None
 
 ** Continue editing workshop.py**
 
@@ -290,12 +290,12 @@ Edit **variables.py**
 
 **On the console:**
 
-	python workshop.py
-	
+    python workshop.py
+    
 **Ouput:**
 
     - 1. You should see a dictionary printed with status: Running. 
-	
+    
 
 ### Task 4:
 #### Fetch last 20 epochs for the running fabric
@@ -323,7 +323,7 @@ Edit **variables.py**
     return epochs
 
 **Edit main()**
-	
+    
     print_banner("Fetch last 20 epochs")
     # Get latest 20 epochs
     last_20_epochs = get_epoch_ids(RUNNING_FABRIC_ID, 20)
@@ -332,9 +332,9 @@ Edit **variables.py**
 
 **On the console:**
 
-	python workshop.py
+    python workshop.py
 
-**Output:**	
+**Output:**    
     - 1. You should see latest epoch id
 
 ### Task 5:
@@ -342,9 +342,9 @@ Edit **variables.py**
 
 **Edit variables.py**: Add the following at the end of the file
 
-	SEVERITY = dict()
-	CATEGORY = dict()
-	MNEMONIC = dict()
+    SEVERITY = dict()
+    CATEGORY = dict()
+    MNEMONIC = dict()
 
 **Continue editing workshop.py**
 
@@ -357,13 +357,13 @@ Edit **variables.py**
 
 **On the console:**
 
-	python workshop.py
+    python workshop.py
 
 **Output:**
 
     1 .You should see latest epoch id
 
-	
+    
 ### Task 6:
 #### Fetch event summary for the latest epoch
 Get a summary of smart events seen in the latest epoch
@@ -379,75 +379,75 @@ Get a summary of smart events seen in the latest epoch
 **Add new methods: fetch_smart_event_summary, proc_smart_events, proc_sev, proc_cat, proc_mne**
 
 
-	def fetch_smart_event_summary(fabric_id, epoch_id, param_dict={}):
-	    # HEADER WITH ALL THE AUTH DETAILS
-	    print "***********************************************************"
-	    print "Please wait while we fetch smart events for fabric: " + str(fabric_id) + " epoch: " + str(epoch_id)
-	    print "***********************************************************"
-	    
-	    '''
-	        Build URL and send the request. 
-	        URL - "https://cnae_ip/api/v1/assured-networks/<fabric_id>/smart-events?$epoch_id=<epoch_id>
-	    '''
-	    smart_events = NAE_BASE_URL+"assured-networks/"+fabric_id+"/smart-events?$epoch_id="+epoch_id
+    def fetch_smart_event_summary(fabric_id, epoch_id, param_dict={}):
+        # HEADER WITH ALL THE AUTH DETAILS
+        print "***********************************************************"
+        print "Please wait while we fetch smart events for fabric: " + str(fabric_id) + " epoch: " + str(epoch_id)
+        print "***********************************************************"
+        
+        '''
+            Build URL and send the request. 
+            URL - "https://cnae_ip/api/v1/assured-networks/<fabric_id>/smart-events?$epoch_id=<epoch_id>
+        '''
+        smart_events = NAE_BASE_URL+"assured-networks/"+fabric_id+"/smart-events?$epoch_id="+epoch_id
 
-	    for param in param_dict.keys():
-	        smart_events = smart_events + "&" + param + "=" + param_dict[param]
+        for param in param_dict.keys():
+            smart_events = smart_events + "&" + param + "=" + param_dict[param]
 
-	    print smart_events
-	    req1 = requests.get(url=smart_events, headers=NAE_HEADER, verify=False)
-	    if req1.status_code is 200:
-	        resp1 = json.dumps(req1.json())
-	        res1 = json.loads(resp1)
-	        page_count = res1['value']['data_summary']['total_page_count']
-	        for j in range(0, page_count):
-	            smart_event_url = smart_events+'&$page='+str(j)
-	            req = requests.get(url=smart_event_url, headers=NAE_HEADER, verify=False)
-	            if req.status_code is 200:
-	                resp = json.dumps(req.json())
-	                res = json.loads(resp)            
-	                proc_smart_events(res)
-	        return True 
-	    else:
-	        return None
+        print smart_events
+        req1 = requests.get(url=smart_events, headers=NAE_HEADER, verify=False)
+        if req1.status_code is 200:
+            resp1 = json.dumps(req1.json())
+            res1 = json.loads(resp1)
+            page_count = res1['value']['data_summary']['total_page_count']
+            for j in range(0, page_count):
+                smart_event_url = smart_events+'&$page='+str(j)
+                req = requests.get(url=smart_event_url, headers=NAE_HEADER, verify=False)
+                if req.status_code is 200:
+                    resp = json.dumps(req.json())
+                    res = json.loads(resp)            
+                    proc_smart_events(res)
+            return True 
+        else:
+            return None
 
-	def proc_smart_events(res):
-	    for i in range(0, len(res['value']['data'])):
-	        cat = res['value']['data'][i]['category']['name']
-	        sev = res['value']['data'][i]['severity']['name']
-	        mnmnic = res['value']['data'][i]['smart_event_info']['name']
-	        sub_category = res['value']['data'][i]['sub_category']['name']
-	        proc_sev(sev)
-	        proc_cat(cat)
-	        proc_mne(mnmnic)
+    def proc_smart_events(res):
+        for i in range(0, len(res['value']['data'])):
+            cat = res['value']['data'][i]['category']['name']
+            sev = res['value']['data'][i]['severity']['name']
+            mnmnic = res['value']['data'][i]['smart_event_info']['name']
+            sub_category = res['value']['data'][i]['sub_category']['name']
+            proc_sev(sev)
+            proc_cat(cat)
+            proc_mne(mnmnic)
 
-	# PROCESS SEVERITY
-	def proc_sev(sev):
-	    SEVERITY[sev] = SEVERITY.get(sev, 0) + 1
-	 
-	# PROCESS CATEGORY
-	def proc_cat(cat):
-	    CATEGORY[cat] = CATEGORY.get(cat, 0) + 1
+    # PROCESS SEVERITY
+    def proc_sev(sev):
+        SEVERITY[sev] = SEVERITY.get(sev, 0) + 1
+     
+    # PROCESS CATEGORY
+    def proc_cat(cat):
+        CATEGORY[cat] = CATEGORY.get(cat, 0) + 1
 
-	# PROCESS MNEMONIC
-	def proc_mne(mnmnic):
-	    MNEMONIC[mnmnic] = MNEMONIC.get(mnmnic, 0) + 1
+    # PROCESS MNEMONIC
+    def proc_mne(mnmnic):
+        MNEMONIC[mnmnic] = MNEMONIC.get(mnmnic, 0) + 1
 
 **Modify main():**
 
-	    print_banner("Fetch event summary for the latest epoch")
-	    # Fetch smart events for the latest epoch for running fabric
-	    fetch_smart_event_summary(RUNNING_FABRIC_ID, latest_epoch)
-	    print("event summary by SEVERITY: ")
-	    print(json.dumps(SEVERITY, indent=4, sort_keys=True))
-	    print("event summary by CATEGORY: ")
-	    print(json.dumps(CATEGORY, indent=4, sort_keys=True))
-	    print("event summary by MNEMONIC: ")
-	    print(json.dumps(MNEMONIC, indent=4, sort_keys=True))
+        print_banner("Fetch event summary for the latest epoch")
+        # Fetch smart events for the latest epoch for running fabric
+        fetch_smart_event_summary(RUNNING_FABRIC_ID, latest_epoch)
+        print("event summary by SEVERITY: ")
+        print(json.dumps(SEVERITY, indent=4, sort_keys=True))
+        print("event summary by CATEGORY: ")
+        print(json.dumps(CATEGORY, indent=4, sort_keys=True))
+        print("event summary by MNEMONIC: ")
+        print(json.dumps(MNEMONIC, indent=4, sort_keys=True))
 
 **On the console:**
 
-	python workshop.py
+    python workshop.py
 
 **Output:**
 
@@ -511,7 +511,7 @@ Get a summary of smart events seen in the latest epoch
 
 **On the console:**
 
-	python workshop.py
+    python workshop.py
 
 **Output:**
 
@@ -559,3 +559,4 @@ Get a summary of smart events seen in the latest epoch
 **This concludes the workshop DEVWKS-1020 for Network Assurance Engine APIs. We hope you have learnt how easy it is to fetch events from NAE using REST APIs.**</br>
 
 Please provide your feedback
+
