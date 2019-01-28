@@ -69,7 +69,7 @@ Import the libraires and define the main method
     requests.packages.urllib3.disable_warnings()
 
     def main():
-         """
+        """
         Main body for DEVWKS-1020. In this, we will
             1. Create a session to the NAE instance
             2. Access all fabrics
