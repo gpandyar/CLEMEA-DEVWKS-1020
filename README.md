@@ -89,7 +89,7 @@ Import the libraires and define the main method
         """
         print_banner("Welcome to DEVWKS-1020")
 
-        def print_banner(message):
+    def print_banner(message):
         """
         Print a banner
         """
