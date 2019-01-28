@@ -97,8 +97,8 @@ Import the libraires and define the main method
         print (message)
         print "*************************************"
 
-        if __name__ == '__main__':
-            main()
+    if __name__ == '__main__':
+        main()
 
 **On the console:**
 
