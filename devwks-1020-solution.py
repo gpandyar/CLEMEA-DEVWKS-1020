@@ -26,13 +26,13 @@ def main():
     if nae_login(NAE_IP, NAE_USER, NAE_PASS):
         header = NAE_HEADER
     else:
-        print "Login failed to: " + NAE_IP + " with username: " + NAE_USER + " and password: " + NAE_PASS
-    print json.dumps(NAE_HEADER, indent=4, sort_keys=True)
+        print ("Login failed to: " + NAE_IP + " with username: " + NAE_USER + " and password: " + NAE_PASS)
+    print (json.dumps(NAE_HEADER, indent=4, sort_keys=True))
 
     print_banner("Get all fabric ids")
     # Get all fabric Ids
     fabric_ids = get_fabric_ids()
-    print json.dumps(fabric_ids, indent=4, sort_keys=True)
+    print (json.dumps(fabric_ids, indent=4, sort_keys=True))
 
     
     print_banner("Fetch running fabric")
@@ -40,12 +40,18 @@ def main():
     for fabric in fabric_ids:
         if fabric['status'] == 'RUNNING':
             RUNNING_FABRIC_ID = fabric['id']
+        else:
+            RUNNING_FABRIC_ID = None
     print (RUNNING_FABRIC_ID)
+
+    if not RUNNING_FABRIC_ID:
+        print ("No running fabric found. Using the first fabric from the list")
+        RUNNING_FABRIC_ID = fabric_ids[0]['id']
 
     print_banner("Fetch last 20 epochs")
     # Get latest 20 epochs
     last_20_epochs = get_epoch_ids(RUNNING_FABRIC_ID, 20)
-    print json.dumps(last_20_epochs, indent=4, sort_keys=True)
+    print (json.dumps(last_20_epochs, indent=4, sort_keys=True))
 
     
     print_banner("Fetch latest epoch")
@@ -89,9 +95,9 @@ def print_banner(message):
     """
     Print a banner
     """
-    print "\n\n*************************************"
+    print ("\n\n*************************************")
     print (message)
-    print "*************************************"
+    print ("*************************************")
 
 
 def nae_login(nae_ip, nae_user, nae_pass):
@@ -163,16 +169,20 @@ def get_fabric_ids():
         resp = json.dumps(req.json())
         res = json.loads(resp)
         data_no = len(res['value']['data'])
+        # exit(1)
         '''
             Write all fabric UUIDs to an array and return the array
         '''
         for f in range(0, data_no):
             fab = dict()
+            print(json.dumps(res['value']['data'][f], indent=4))
             fab['id'] = res['value']['data'][f]['uuid']
             fab['status'] = res['value']['data'][f]['status']
             if fab['status'] == 'RUNNING':
                 fab['apic_hosts'] = res['value']['data'][f]['apic_hostnames']
             fabric_ids.append(fab)
+    print ("Fabric Ids: ")
+    print (fabric_ids)
     return fabric_ids
 
 def get_epoch_ids(fabric_id, count):
@@ -194,9 +204,9 @@ def get_epoch_ids(fabric_id, count):
 
 def fetch_smart_events(fabric_id, epoch_id, event_id=None, param_dict=None):
     # HEADER WITH ALL THE AUTH DETAILS
-    print "***********************************************************"
-    print "Please wait while we fetch smart events for fabric: " + str(fabric_id) + " epoch: " + str(epoch_id)
-    print "***********************************************************"
+    print ("***********************************************************")
+    print ("Please wait while we fetch smart events for fabric: " + str(fabric_id) + " epoch: " + str(epoch_id))
+    print ("***********************************************************")
     
     '''
         Build URL and send the request. 
@@ -221,9 +231,9 @@ def fetch_smart_events(fabric_id, epoch_id, event_id=None, param_dict=None):
 
 def fetch_smart_event_summary(fabric_id, epoch_id, param_dict={}):
     # HEADER WITH ALL THE AUTH DETAILS
-    print "***********************************************************"
-    print "Please wait while we fetch smart events for fabric: " + str(fabric_id) + " epoch: " + str(epoch_id)
-    print "***********************************************************"
+    print ("***********************************************************")
+    print ("Please wait while we fetch smart events for fabric: " + str(fabric_id) + " epoch: " + str(epoch_id))
+    print ("***********************************************************")
     
     '''
         Build URL and send the request. 
