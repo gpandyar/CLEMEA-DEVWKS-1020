@@ -169,8 +169,9 @@ def get_fabric_ids():
         for f in range(0, data_no):
             fab = dict()
             fab['id'] = res['value']['data'][f]['uuid']
-            fab['apic_hosts'] = res['value']['data'][f]['apic_hostnames']
             fab['status'] = res['value']['data'][f]['status']
+            if fab['status'] == 'RUNNING':
+                fab['apic_hosts'] = res['value']['data'][f]['apic_hostnames']
             fabric_ids.append(fab)
     return fabric_ids
 
