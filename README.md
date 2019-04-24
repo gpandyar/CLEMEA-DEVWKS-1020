@@ -1,16 +1,17 @@
-# CLEMEA-DEVWKS-1020
+# DevNet Create 19
 
-# DevNet Workshop for NAE APIs at CLEMEA19 (DEVWKS-1020)
+# DevNet Workshop for NAE APIs at DevNet Create 19
 
-# Scripts for DevNet Workshop 1020 @ Cisco Live Europe 2019
+# Scripts for NAE DevNet Workshop DevNet Create 2019
 ### Postman Collection for common NAE operations
 Download collection and open in Postman2. Also download the environment and load as the current environment. Collection will not work without the environment.
 ### Postman Environment to run above collections
 Use in conjunction with postman collections for NAE automated login and user creation
 ### Python scripts for the workshop
 
-# NAE API WORKSHOP - DEVWKS-1020
+# NAE API WORKSHOP - DevNet Create 19
 
+### Your laptop will have virtualenv pre-installed.
 ### Go to the terminal and run: 
 
     virtualenv devwks1020 --> This will create your own virtual environment in which you can install all the dependencies for this workshop
@@ -23,14 +24,10 @@ Use in conjunction with postman collections for NAE automated login and user cre
     touch workshop.py  --> Creates a file named workshop.py in which you will write the code for this workshop
 
 ###    Credentials for this workshop
-    NAE IP: 10.193.30.244
-    username: devwks1020.user{user-number}
-    password: DEVWKS1020user{user-number}
 
-
-replace {usernumber} with the number assigned to your workstation
-eg: user1 will be "devwks.user1", user2 will be "devwks.user2"  and so on
-password for user1 will be: DEVWKS1020user1
+    NAE IP: 192.168.132.99
+    username: devnet{userid}
+    password: Devnetcreate@19
 
 
 # LAB
@@ -70,7 +67,7 @@ Import the libraires and define the main method
 
     def main():
         """
-        Main body for DEVWKS-1020. In this, we will
+        Main body for DevNet Create 19. In this, we will
             1. Create a session to the NAE instance
             2. Access all fabrics
             3. Fetch fabric
@@ -87,15 +84,15 @@ Import the libraires and define the main method
 
 
         """
-        print_banner("Welcome to DEVWKS-1020")
+        print_banner("Welcome to DevNet Create 19!")
 
     def print_banner(message):
         """
         Print a banner
         """
-        print "\n\n*************************************"
+        print ("\n\n*************************************")
         print (message)
-        print "*************************************"
+        print ("*************************************")
 
     if __name__ == '__main__':
         main()
@@ -104,7 +101,7 @@ Import the libraires and define the main method
 
     python workshop.py
 
-Make sure there are no errors and you see the message "Welcome to DEVWKS-1020" printed on the screen
+Make sure there are no errors and you see the message "Welcome to DevNet Create 19" printed on the screen
 
 Continue editing workshop.py
 
@@ -115,13 +112,17 @@ Open variables.py and add the following at the end:
     
     APIC_IP = "candid2-apic3.cisco.com"
 
-    NAE_IP = "10.193.30.244"
-    NAE_USER = "devwks1020.user9"
-    NAE_PASS = "DEVWKS1020user9"
+    NAE_IP = "192.168.132.99"
+    NAE_USER = "user1"
+    NAE_PASS = "Devnet@Create19"
     NAE_HEADER = dict()
 
     APIC_BASE_URL = "https://" + APIC_IP + "/api/"
     NAE_BASE_URL = "https://" + NAE_IP + "/api/v1/"
+
+    WMI_URL = NAE_BASE_URL + "whoami"
+    LOGIN_URL = NAE_BASE_URL + "login"
+
 
 **Edit workshop.py:**
 
@@ -188,9 +189,8 @@ Open variables.py and add the following at the end:
         if nae_login(NAE_IP, NAE_USER, NAE_PASS):
             header = NAE_HEADER
         else:
-            print "Login failed to: " + NAE_IP + " with username: " + NAE_USER + " and password: " + NAE_PASS
+            print ("Login failed to: " + NAE_IP + " with username: " + NAE_USER + " and password: " + NAE_PASS)
         
-        print json.dumps(NAE_HEADER, indent=4, sort_keys=True)
 
 
 
@@ -203,7 +203,7 @@ Open variables.py and add the following at the end:
     - 2. If everything works out, you should see no output. </br>
     - 3. If you choose to, you can also print the headers which are populated using the print command:
     
-    print json.dumps(NAE_HEADER, indent=4, sort_keys=True)
+    print (json.dumps(NAE_HEADER, indent=4, sort_keys=True))
 
 
 ### Task 2:
@@ -257,7 +257,7 @@ Edit **variables.py**
         print_banner("Get all fabric ids")
         # Get all fabric Ids
         fabric_ids = get_fabric_ids()
-        print json.dumps(fabric_ids, indent=4, sort_keys=True)
+        print (json.dumps(fabric_ids, indent=4, sort_keys=True))
     
 
 **On the console:**
@@ -270,9 +270,10 @@ Edit **variables.py**
    - 2. You will see that a list of fabric dictionaries is returned on success. </br>
    - 3. You can choose to print the result using:
 
-    print json.dumps(fabric_ids, indent=4, sort_keys=True)
+    print (json.dumps(fabric_ids, indent=4, sort_keys=True))
 
-###Task 3:
+## Task 3:
+
 #### Fetch running fabric --> NAE can actively monitor only 1 fabric at a given time. Running fabric is the fabric that is currently actively monitored by NAE
 
 **Continue editing variables.py**
@@ -284,9 +285,16 @@ Edit **variables.py**
         print_banner("Fetch running fabric")
         # Get running fabric
         for fabric in fabric_ids:
-            if fabric['status'] == 'RUNNING':
-                RUNNING_FABRIC_ID = fabric['id']
-        print (RUNNING_FABRIC_ID)
+        if fabric['status'] == 'RUNNING':
+            RUNNING_FABRIC_ID = fabric['id']
+        else:
+            RUNNING_FABRIC_ID = None
+            print (RUNNING_FABRIC_ID)
+
+        # If no running fabric is found, we will use the first fabric
+        if not RUNNING_FABRIC_ID:
+            print ("No running fabric found. Using the first fabric from the list")
+            RUNNING_FABRIC_ID = fabric_ids[0]['id']
 
 
 **On the console:**
@@ -328,7 +336,7 @@ Edit **variables.py**
         print_banner("Fetch last 20 epochs")
         # Get latest 20 epochs
         last_20_epochs = get_epoch_ids(RUNNING_FABRIC_ID, 20)
-        print json.dumps(last_20_epochs, indent=4, sort_keys=True)
+        print (json.dumps(last_20_epochs, indent=4, sort_keys=True))
 
 
 **On the console:**
@@ -382,9 +390,9 @@ Get a summary of smart events seen in the latest epoch
 
     def fetch_smart_event_summary(fabric_id, epoch_id, param_dict={}):
         # HEADER WITH ALL THE AUTH DETAILS
-        print "***********************************************************"
-        print "Please wait while we fetch smart events for fabric: " + str(fabric_id) + " epoch: " + str(epoch_id)
-        print "***********************************************************"
+        print ("***********************************************************")
+        print ("Please wait while we fetch smart events for fabric: " + str(fabric_id) + " epoch: " + str(epoch_id))
+        print ("***********************************************************")
         
         '''
             Build URL and send the request. 
@@ -395,7 +403,7 @@ Get a summary of smart events seen in the latest epoch
         for param in param_dict.keys():
             smart_events = smart_events + "&" + param + "=" + param_dict[param]
 
-        print smart_events
+        print (smart_events)
         req1 = requests.get(url=smart_events, headers=NAE_HEADER, verify=False)
         if req1.status_code is 200:
             resp1 = json.dumps(req1.json())
@@ -466,9 +474,9 @@ Get a summary of smart events seen in the latest epoch
 
     def fetch_smart_events(fabric_id, epoch_id, event_id=None, param_dict=None):
         # HEADER WITH ALL THE AUTH DETAILS
-        print "***********************************************************"
-        print "Please wait while we fetch smart events for fabric: " + str(fabric_id) + " epoch: " + str(epoch_id)
-        print "***********************************************************"
+        print ("***********************************************************")
+        print ("Please wait while we fetch smart events for fabric: " + str(fabric_id) + " epoch: " + str(epoch_id))
+        print ("***********************************************************")
         
         '''
             Build URL and send the request. 
@@ -482,7 +490,7 @@ Get a summary of smart events seen in the latest epoch
             for param in param_dict.keys():
                 smart_events = smart_events + "&" + param + "=" + param_dict[param]
 
-        print smart_events
+        print (smart_events)
         req1 = requests.get(url=smart_events, headers=NAE_HEADER, verify=False)
         if req1.status_code is 200:
             resp1 = json.dumps(req1.json())
@@ -557,7 +565,7 @@ Get a summary of smart events seen in the latest epoch
 
 
 
-**This concludes the workshop DEVWKS-1020 for Network Assurance Engine APIs. We hope you have learnt how easy it is to fetch events from NAE using REST APIs.**</br>
+**This concludes the workshop DevNet Create 19 for Network Assurance Engine APIs. We hope you have learnt how easy it is to fetch events from NAE using REST APIs.**</br>
 
 Please provide your feedback
 
