@@ -1,8 +1,7 @@
-# DevNet Create 19
+# DevNet Workshop for NAE APIs
 
-# DevNet Workshop for NAE APIs at DevNet Create 19
+# Scripts for NAE DevNet Workshop DEVWKS-1020
 
-# Scripts for NAE DevNet Workshop DevNet Create 2019
 ### Postman Collection for common NAE operations
 Download collection and open in Postman2. Also download the environment and load as the current environment. Collection will not work without the environment.
 ### Postman Environment to run above collections
