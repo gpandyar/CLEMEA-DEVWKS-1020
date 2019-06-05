@@ -214,7 +214,7 @@ Edit **variables.py**
 
     FABRIC_URL = NAE_BASE_URL + "assured-networks/aci-fabric"
     
-**Continue editing <em>workshop.py**
+**Continue editing <em>workshop.py**</em>
 
     - 1. Add a new method get_fabric_ids()
     - 2. Edit main()
