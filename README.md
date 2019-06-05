@@ -24,9 +24,9 @@ Use in conjunction with postman collections for NAE automated login and user cre
 
 ###    Credentials for this workshop
 
-    NAE IP: 192.168.132.99
-    username: devnet{userid}
-    password: Devnetcreate@19
+    NAE IP: https://nae-sandbox.cisco.com
+    username: developer
+    password: C!sco1234567890
 
 
 # LAB
