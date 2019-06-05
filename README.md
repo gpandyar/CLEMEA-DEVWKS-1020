@@ -109,12 +109,7 @@ Continue editing workshop.py
 
 Open variables.py and add the following at the end:
     
-    APIC_IP = "candid2-apic3.cisco.com"
-
-    NAE_IP = "192.168.132.99"
-    NAE_USER = "user1"
-    NAE_PASS = "Devnet@Create19"
-    NAE_HEADER = dict()
+    APIC_IP = "aci-k8tes-sandbox"
 
     APIC_BASE_URL = "https://" + APIC_IP + "/api/"
     NAE_BASE_URL = "https://" + NAE_IP + "/api/v1/"
