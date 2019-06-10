@@ -111,9 +111,9 @@ Open variables.py and add the following at the end:
     
     APIC_IP = "aci-k8tes-sandbox"
 
-    NAE IP: https://nae-sandbox.cisco.com
-    NAE_USER: developer
-    NAE_PASS: C!sco1234567890
+    NAE IP = https://nae-sandbox.cisco.com
+    NAE_USER = developer
+    NAE_PASS = C!sco1234567890
 
     APIC_BASE_URL = "https://" + APIC_IP + "/api/"
     NAE_BASE_URL = "https://" + NAE_IP + "/api/v1/"
