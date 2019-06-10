@@ -14,6 +14,8 @@ Use in conjunction with postman collections for NAE automated login and user cre
 ### Go to the terminal and run: 
 
     virtualenv devwks1020 --> This will create your own virtual environment in which you can install all the dependencies for this workshop
+    
+    source devwks1020/bin/activate --> This will activate your virtual environment
 
     pip install requests --> will install requests package which is required for this workshop
 
