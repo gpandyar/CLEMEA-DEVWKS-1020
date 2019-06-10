@@ -289,9 +289,9 @@ Edit **variables.py**
         for fabric in fabric_ids:
             if fabric['status'] == 'RUNNING':
                 RUNNING_FABRIC_ID = fabric['id']
+                print (RUNNING_FABRIC_ID)
             else:
                 RUNNING_FABRIC_ID = None
-                print (RUNNING_FABRIC_ID)
 
         # If no running fabric is found, we will use the first fabric
         if not RUNNING_FABRIC_ID:
