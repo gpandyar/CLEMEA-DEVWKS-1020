@@ -113,7 +113,7 @@ Open variables.py and add the following at the end:
     
     APIC_IP = "aci-k8tes-sandbox"
 
-    NAE_IP = "https://nae-sandbox.cisco.com"
+    NAE_IP = "nae-sandbox.cisco.com"
     NAE_USER = "developer"
     NAE_PASS = "C!sco1234567890"
     NAE_HEADER = {}
