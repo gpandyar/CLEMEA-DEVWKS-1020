@@ -293,10 +293,10 @@ Edit **variables.py**
                 RUNNING_FABRIC_ID = None
                 print (RUNNING_FABRIC_ID)
 
-            # If no running fabric is found, we will use the first fabric
-            if not RUNNING_FABRIC_ID:
-                print ("No running fabric found. Using the first fabric from the list")
-                RUNNING_FABRIC_ID = fabric_ids[0]['id']
+        # If no running fabric is found, we will use the first fabric
+        if not RUNNING_FABRIC_ID:
+            print ("No running fabric found. Using the first fabric from the list")
+            RUNNING_FABRIC_ID = fabric_ids[0]['id']
 
 
 **On the console:**
