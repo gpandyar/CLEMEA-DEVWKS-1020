@@ -116,12 +116,14 @@ Open variables.py and add the following at the end:
     NAE_IP = "https://nae-sandbox.cisco.com"
     NAE_USER = "developer"
     NAE_PASS = "C!sco1234567890"
+    NAE_HEADER = {}
 
     APIC_BASE_URL = "https://" + APIC_IP + "/api/"
     NAE_BASE_URL = "https://" + NAE_IP + "/api/v1/"
 
     WMI_URL = NAE_BASE_URL + "whoami"
     LOGIN_URL = NAE_BASE_URL + "login"
+    
 
 
 **Edit workshop.py:**
