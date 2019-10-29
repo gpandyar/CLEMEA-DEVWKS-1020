@@ -43,6 +43,20 @@ Use in conjunction with postman collections for NAE automated login and user cre
     - c. severity
 - 8. Find all the epochs in which an event exists
 
+### Two ways to do this workshop
+
+#### Use "solution" branch
+- 1. Use solution branch code
+- 2. Open terminal. Click on the looking glass icon on the top right side of your screen. Type "terminal". Hit Enter
+- 3. Run each task using the command "python task<id>.py". For example, to run task0, you run the command "python task0.py"
+This will give you a chance to see the output of each command, and understand how NAE APIs work. Gives you more time to read through the existing code. Please choose this option if you have challenges using "vi editor".
+    
+#### Copy/paste the code from this workshop
+- 1. Use "master" branch
+- 2. Copy/paste code from "readme" for each task. Modify as per commands
+- 3. Run each task using the command "python workshop.py"
+This will give you a hands-on experience with some of the coding.
+
 ### Variables
 
 All variables are defined in <em>variables.py</em>
