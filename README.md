@@ -61,7 +61,7 @@ This will give you a hands-on experience with some of the coding.
 
 All variables are defined in <em>variables.py</em>
 
-<strong>Solution is available in solution.py and variables.py.bkp
+<strong>Solution is available in solution.py and variables.py
 
 But you are encouraged to try it on your own. Copy-Paste is absoultely <italic>ACCEPTABLE</italic></strong>
 
